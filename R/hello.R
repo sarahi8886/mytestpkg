@@ -21,7 +21,7 @@
 #'
 Chal_func <- function(x){
 
-  k =  x/20
+  k =  x/5
 
   return(k)
 

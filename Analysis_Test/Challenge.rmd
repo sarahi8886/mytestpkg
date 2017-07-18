@@ -1,5 +1,5 @@
 ---
-title: "Challenge"
+title: "Challenges"
 output: bookdown::html_document2
 
 ---
@@ -17,7 +17,7 @@ library("mytestpkg")
 ```
 
 
-This is a test function to test the function:  `r Chal_func(15)`
+This is a test function to test the fn:  `r Chal_func(15)`
 
 <!--         
 
