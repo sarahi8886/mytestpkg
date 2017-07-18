@@ -17,7 +17,7 @@ library("mytestpkg")
 ```
 
 
-This is a test function:  `r Chal_func(15)`
+This is a test function to test the function:  `r Chal_func(15)`
 
 <!--         
 
