@@ -1,0 +1,26 @@
+---
+title: "Challenge"
+output: bookdown::html_document2
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Challenge Funktion
+
+
+
+```{r}
+library("mytestpkg")
+```
+
+
+This is a test function:  `r Chal_func(15)`
+
+<!--         
+
+
+
+-->
