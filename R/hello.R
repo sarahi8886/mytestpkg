@@ -28,12 +28,25 @@ Chal_func <- function(x){
 }
 
 
-Chal_func(15)
 
 
+#' Test Function
+#'
+#' @param x
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' Test_func(5)
+#'
+Test_func <- function(x){
 
+  k =  x/2.5
 
+  return(k)
 
+}
 
 
 

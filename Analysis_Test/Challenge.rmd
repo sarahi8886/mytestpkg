@@ -1,6 +1,7 @@
 ---
 title: "Challenges"
 output: bookdown::html_document2
+bibliography: my_ref.bib
 
 ---
 
@@ -8,19 +9,123 @@ output: bookdown::html_document2
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Challenge Funktion
+#Challenge 
+
+Challenge:
+
+1. Within you ms. add a simple table and plot        +
+2. Add captions and cross-refs to those              +
+3. Add a bib file & two citations to your ms.        +
+4. Add a second simple function to you R/          +
+5. Add a simple test for this send fn           +
+6. have your pkg pass the test                  +
 
 
+stretch goals
+1. Use a package in your second function (properly)
+2. Write a third fn that uses dplyr pipes
+3. Use caching an dependson in your rmd
+
+
+
+
+
+# Challenge Funktion
+
+This is a test citation [@roth2016short]
 
 ```{r}
-library("mytestpkg")
+library(mytestpkg)
+
 ```
 
 
 This is a test function to test the fn:  `r Chal_func(15)`
 
-<!--         
+
+This is the structure of my function:
+```{r, eval=FALSE}
+Test_func <- function(x){
+
+  k =  x/2.5
+
+  return(k)
+
+}
+
+```
+
+If x = 5 the result is `r Test_func(5)`
 
 
 
--->
+
+This is the Data of Table \@ref(tab:TestTable)
+
+```{r}
+
+
+trial <- matrix(c(34,11,9,32), ncol=2)
+colnames(trial) <- c('x', 'y')
+rownames(trial) <- c('z', 'zs')
+trial.table <- as.table(trial)
+```
+
+```{r TestTable}
+knitr::kable(head(trial.table),
+                caption = "Test Table")
+```
+
+
+See the test Plot in Figure \@ref(fig:testplot)
+
+
+```{r testplot, fig.cap= "testplot"}
+plot(trial.table)
+```
+
+
+
+
+
+
+
+#Beispiele Ben:
+
+Tip:      
+- Bibliography file muss immer im selben Ordner wie der Markdown File liegen!     
+- Wichtig bei der Tabelle ist caption          
+- Wenn man eine Funktion für ein Paket erstellt, dann muss zuvor das Paket neu gebaut und geladen werden (Build & Reloade)
+- Die Funktion muss in erster linie im R File (hello.R) erstellt werden und kann über roxygen in den Markdownfile eingebunden werden!
+- Einfügen von roxygen für die Funktion: In die Funktion zwischen die geschwungenen Klammern clicken und (Code-> Insert Roxygen Skeleton)      
+- mit {r, eval=FALSE} wird das Ausführen der Funktion im Markdown unterdrückt wenn sie bereits im hello.R file existiert. In diesem Fall gibt die Funktion beim knitting kein Ergebnis aus, sondern wird      
+- über Imports: glue, tidyvers etc in Description können bereits bestehende Pakete in das eigene, neu erstellte Paket einbebunden werden
+
+
+
+#Test:
+
+test_that("my second function", {
+  expect_equal(letters(3),"9")
+})
+
+     
+         
+             
+                 
+
+
+```{r simpletable}
+knitr::kable(head(iris),
+             caption = "my table")
+
+```
+
+
+
+
+
+
+
+
+
