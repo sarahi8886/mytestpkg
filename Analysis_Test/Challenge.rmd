@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #Challenge 
 
-Challenge:
+Challenge :
 
 1. Within you ms. add a simple table and plot        +
 2. Add captions and cross-refs to those              +
