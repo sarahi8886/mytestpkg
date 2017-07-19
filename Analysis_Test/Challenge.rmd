@@ -16,9 +16,9 @@ Challenge:
 1. Within you ms. add a simple table and plot        +
 2. Add captions and cross-refs to those              +
 3. Add a bib file & two citations to your ms.        +
-4. Add a second simple function to you R/          +
-5. Add a simple test for this send fn           +
-6. have your pkg pass the test                  +
+4. Add a second simple function to you R/             +
+5. Add a simple test for this send fn                  +
+6. have your pkg pass the test                        +
 
 
 stretch goals
@@ -55,7 +55,7 @@ Test_func <- function(x){
 
 ```
 
-If x = 5 the result is `r Test_func(5)`
+If x = 5 the super result is `r Test_func(5)`
 
 
 
