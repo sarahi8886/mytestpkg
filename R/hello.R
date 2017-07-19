@@ -21,7 +21,7 @@
 #'
 Chal_func <- function(x){
 
-  k =  x/30
+  k =  x / 30
 
   return(k)
 
