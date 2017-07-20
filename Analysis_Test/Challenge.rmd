@@ -7,6 +7,7 @@ bibliography: my_ref.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 #Challenge 
@@ -16,9 +17,9 @@ Challenge :
 1. Within you ms. add a simple table and plot        +
 2. Add captions and cross-refs to those              +
 3. Add a bib file & two citations to your ms.        +
-4. Add a second simple function to you R/             +
-5. Add a simple test for this send fn                  +
-6. have your pkg pass the test                        +
+4. Add a second simple function to you R/            +
+5. Add a simple test for this send fn                +
+6. have your pkg pass the test                       +
 
 
 stretch goals
@@ -125,13 +126,6 @@ knitr::kable(head(iris),
 
 
 
-
-```{r}
-library(binford)
-data(LRB)
-knitr::kable(head(LRB))
-
-```
 
 
 
