@@ -9,6 +9,9 @@ Chal_func(x)
 \arguments{
 \item{x}{a nummeric value}
 }
+\value{
+numeric
+}
 \description{
 Challenge Function
 }

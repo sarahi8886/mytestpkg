@@ -12,7 +12,7 @@
 #'
 #' @param x a nummeric value
 #'
-#' @return
+#' @return numeric
 #' @export
 #'
 #' @examples

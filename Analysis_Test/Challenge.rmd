@@ -126,6 +126,14 @@ knitr::kable(head(iris),
 
 
 
+```{r}
+library(binford)
+data(LRB)
+knitr::kable(head(LRB))
+
+```
+
+
 
 
 

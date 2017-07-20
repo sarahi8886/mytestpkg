@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 my_references.bib
+packrat/lib*/
