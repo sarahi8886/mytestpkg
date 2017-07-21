@@ -289,20 +289,68 @@ points(harran_rpoispp3, col= "green")
 ```
 
 
+#Second Order Effects
+
+##Gest
+
+```{r}
+
+harran_g <- Gest(harran_ppp)          
+#str(harran_g)
+plot(harran_g)  #(blue line poisson function), Gr ammount of points that have a have a certain nearest neighbour distance, empirische 
+```
 
 
 
 
 
+```{r}
+harran_ge <- envelope(harran_ppp, fun = "Gest") #envelope takes random points 99 times and calculates the g function for this 99 points
+plot(harran_ge)
+
+```
+
+
+grey shadow is result of the montecarlo simulation, this results shows that based on the G-Function the point distribution in teh Harran Plain is random
 
 
 
+##Fest
 
 
 
+```{r}
+
+harran_f <- Fest(harran_ppp)          
+#str(harran_f)
+plot(harran_f) 
+
+```
 
 
 
+```{r}
+harran_fe <- envelope(harran_ppp, fun = "Fest") #envelope takes random points 99 times and calculates the g function for this 99 points
+plot(harran_fe)
+```
+
+
+##Kest
+
+
+
+```{r}
+harran_k <- Kest(harran_ppp)          
+#str(harran_k)
+plot(harran_k) 
+```
+
+
+
+```{r}
+harran_ke <- envelope(harran_ppp, fun = "Kest") #envelope takes random points 99 times and calculates the g function for this 99 points
+plot(harran_ke)
+```
 
 
 
