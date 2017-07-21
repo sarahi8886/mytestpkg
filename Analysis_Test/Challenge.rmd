@@ -334,6 +334,9 @@ harran_fe <- envelope(harran_ppp, fun = "Fest") #envelope takes random points 99
 plot(harran_fe)
 ```
 
+This Grafic shows how large are the empty spaces between my points are. Since the black line which represents our data lies underneath the simulated data, empty spaces are clustered from about r=2000 on.
+The F function fills the empty spaces with random points where the area for calculations is bounded by our window that we defined earlier.
+
 
 ##Kest
 
@@ -348,12 +351,12 @@ plot(harran_k)
 
 
 ```{r}
-harran_ke <- envelope(harran_ppp, fun = "Kest") #envelope takes random points 99 times and calculates the g function for this 99 points
+harran_ke <- envelope(harran_ppp, fun = "Kest", nsim = 99) #envelope takes random points 99 times and calculates the g function for this 99 points
 plot(harran_ke)
 ```
 
 
-
+With increasing distince, the tendency of points to be clustered rises. This is caused by the definition of our Study area. 
 
 
 
