@@ -7,7 +7,6 @@ bibliography: my_ref.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 ```
 
 #Challenge 
@@ -121,6 +120,185 @@ knitr::kable(head(iris),
              caption = "my table")
 
 ```
+
+
+     
+          
+          
+
+
+#Beispiel Daniel - Point Pattern      
+         
+                 
+                 
+                 
+Laden des Datensatzes:
+
+```{r}
+harran <- read.table("../data/Sites_HarranPlain.csv", #einladen der Harran Ebenen Daten
+                     sep = ",",                       #, wird als seperator definiert
+                     header=TRUE)
+#str(harran)                                           #struktur des Datensatzes
+
+                               
+
+
+```
+
+
+Laden von Spatstat & sp
+
+
+```{r}
+library(spatstat) 
+library(sp)
+```
+
+
+Umprojezieren der Daten:
+
+```{r}
+coordinates(harran) <- ~X+Y
+proj4string(harran) <- CRS("+init=epsg:4326") #Overwrites the former projection!!!!!!!
+
+#str(harran)
+
+harran <- spTransform(harran, CRSobj = CRS("+init=epsg:32637"))
+
+
+
+
+
+```
+
+
+Point Patterns Object creation:
+
+```{r}
+harran_ppp <- ppp(x = harran@coords[,1],
+                  y = harran@coords[,2],
+                  window = owin(xrange = harran@bbox[1,],
+                               yrange = c(min(harran@coords[,2]),
+                                          min(harran@coords[,2]+52000)))) # Das Einbinden von check = FALSE  würde alle Punkte außerhalb des fensters und doppelte Punkte unwiederbringlich löschen 
+                  
+#str(harran_ppp)
+
+anyDuplicated(harran_ppp)              #Suchen von doppelten Punkten
+harran_ppp <- unique(harran_ppp)       #Entfernen von doppelten Punkten
+plot(harran_ppp)
+
+harran_ppp_nn <- nndist(harran_ppp)    #macht einen Vektor aus den Nearest Neigbour Werten der Datei harran_ppp
+#str(harran_ppp_nn)
+barplot(sort(harran_ppp_nn))           #erstellt ein nach Werten aufsteigenden Barplot
+hist(harran_ppp_nn)                    #erstellt ein Histogramm
+
+
+                  
+```
+
+
+Create a Kernal Density Estimation
+
+```{r}
+
+
+#harran_kde <- density(harran_ppp, bw = mean(harran_ppp_nn)) #berechnet die Kernel Density Estimation mit 
+#harran_kde <- density(harran_ppp, sigma = 5000)
+#harran_kde <- density.ppp(harran_ppp, sigma = 5000)
+harran_kde <- density.ppp(x = harran_ppp, sigma = mean(harran_ppp_nn))  #richtige methode, ussing the empirical sigma
+#bw.ppl(harran_ppp)       #zeigt sigma an wird genutzt bei first order effects
+#bw.diggle(harran_ppp)    #zeigt ebenfalls sigma an, bei geclusterten Point Patterns zu verwenden
+plot(harran_kde)
+#plot(bw.ppl(harran_ppp))
+#plot(bw.ppl(harran_ppp), xlim = c(2000,5000)) #choose your bandwidth according to your Question
+
+```
+
+Are Points related to the Elevation?
+
+```{r}
+
+library(raster)
+dem <- raster("../data/dem.tif")         #einladen der DEM Daten direkt als Raster
+
+
+#library(gdal)                #zweite Möglichkeit zum einladen vom DEM, macht allerdings ein SpacialGridDataFrame draus, kein Raster!
+#dem <- readGDAL("../data/dem.tif")
+
+#library(mapview)
+#mapview(dem)
+
+#Spatstat kann mit rastern nicht umgehen, muss umgeformt werden (Weil, Spatstat package is older than the raster)
+library(rgdal)
+
+
+im_dem <- as.im(as.image.SpatialGridDataFrame(as(dem, "SpatialGridDataFrame"))) #umformen von Raster zu SpatialGridDataFrame
+
+#str(im_dem)
+
+harran_rhohat <- rhohat(harran_ppp, im_dem) #object harran_ppp (punkte), covariate im_dem (dem/hoeheninformation)- zeigt rellation zwischen Höhe und Punktdichte
+
+plot(harran_rhohat)
+
+#str(harran_rhohat)   #sehr geringes sigma 6.88 = Bandweite, sehr gering und nicht uunbedingt nützlich, daher eventuell sigma selbst bestimmen
+
+harran_rhohat <- rhohat(harran_ppp, im_dem, bw = 200) #
+
+plot(harran_rhohat)
+
+```
+
+
+predict a new density map based on the lately calculated harran_rhohat data
+
+
+
+```{r}
+
+rho_dem <- predict(harran_rhohat) #used to predict first order density
+plot(rho_dem)
+
+diff_rho <- harran_kde - rho_dem #ermittelt den Unterschied zwischen unserer berechneten Kernel Density Estimation (harran_kde) und den vorhergesagten Werten aus harran_rhohat
+plot(diff_rho) # Ergebniss ist eine First Order Effect Map (Einfluss der Faktoren allerdings berücksichtigen!)
+
+```
+
+Creating random points based on the point density of harran_ppp
+
+
+```{r}
+#set.seed(123) #random number - a point of a very long random list were it starts, in diesem Falle werden die Punkte aus harran_rpoispp1-3 jeweils überschrieben beim Plotten -> in der letzten Abbildung wären dann nur noch die Ausgangspunkte von harran_ppp und harran_rpoispp3 dargestellt, da die ergebnisse der unterschiedlichen methoden übereinstimmen. Ohne set.seed werden alle Punkte randomized gesetzt, somit sind dann schwarz, blau, rot und grün zu sehen
+
+harran_rpoispp1 <- rpoispp(harran_ppp$n/area.owin(harran_ppp$window), win = harran_ppp$window)  #poisson distribution testing (randomn poisson process) - Lambda gleich pointdensity wie harran_ppp
+
+#set.seed(123)
+
+harran_rpoispp2 <- rpoispp(intensity(harran_ppp), win = window(harran_ppp)) #einfachere Variante
+
+#set.seed(123)
+
+harran_rpoispp3 <- rpoispp(ex = harran_ppp)  #einfachste variante
+
+
+plot(harran_ppp)
+points(harran_rpoispp1, col= "red")
+points(harran_rpoispp2, col= "blue")
+points(harran_rpoispp3, col= "green")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
