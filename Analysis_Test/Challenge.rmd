@@ -43,15 +43,7 @@ library(mytestpkg)
 This is a test function to test the fn:  `r Chal_func(15)`
 
 
-This is the structure of my function:
-```{r, eval=FALSE}
-Test_func <- function(x){
 
-  k =  x/2.5
-
-  return(k)
-
-}
 
 ```
 
