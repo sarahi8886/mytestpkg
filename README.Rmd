@@ -1,5 +1,6 @@
 ---
 output: github_document
+
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -14,9 +15,9 @@ knitr::opts_chunk$set(
 
 # mytestpkg
 
-[![Travis-CI Build Status](https://travis-ci.org/sarahi8886/mytestpkg.svg?branch=master)](https://travis-ci.org/sarahi8886/mytestpkg) [![Circle CI](https://circleci.com/gh/sarahi8886/mytestpkg.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/sarahi8886/mytestpkg)
+[![Travis-CI Build Status](https://travis-ci.org/sarahi8886/mytestpkg.svg?branch=master)](https://travis-ci.org/sarahi8886/mytestpkg)
 
-The goal of mytestpkg is to testetstest
+The goal of mytestpkg is to (Test)
 
 ## Installation
 
@@ -34,13 +35,3 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 ## basic example code
 ```
-
-
-
-
-
-
-
-
-
-

@@ -3,9 +3,9 @@
 mytestpkg
 =========
 
-[![Travis-CI Build Status](https://travis-ci.org/sarahi8886/mytestpkg.svg?branch=master)](https://travis-ci.org/sarahi8886/mytestpkg) [![Circle CI](https://circleci.com/gh/sarahi8886/mytestpkg.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/sarahi8886/mytestpkg)
+[![Travis-CI Build Status](https://travis-ci.org/sarahi8886/mytestpkg.svg?branch=master)](https://travis-ci.org/sarahi8886/mytestpkg)
 
-The goal of mytestpkg is to testetstest
+The goal of mytestpkg is to (Test)
 
 Installation
 ------------
