@@ -16,7 +16,6 @@ addons:
       - libgeos-dev
       - libpng-dev
       - libproj-dev
-      - libmapview-dev
 script:
   - Rscript -e "devtools::install()"
   - Rscript -e "rmarkdown::render('Analysis_Test/Challenge.Rmd')"
