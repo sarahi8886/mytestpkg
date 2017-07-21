@@ -360,3 +360,16 @@ With increasing distince, the tendency of points to be clustered rises. This is 
 
 
 
+##Ginhom
+
+
+```{r}
+
+harran_gi <- Ginhom(harran_ppp, lambda = predict(harran_rhohat))
+plot(harran_gi)
+
+
+```
+
+
+
